@@ -1,131 +1,34 @@
 import { sql } from "@/lib/db"
-import { DataTable } from "@/components/ui/data-table"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
+import { StudentsTable } from "@/components/students/students-table"
 import Link from "next/link"
 import { 
-  PlusCircle, 
   School, 
   Download, 
   Search, 
   Filter, 
-  UserRoundPlus, 
-  Mail,
-  Phone
+  UserRoundPlus
 } from "lucide-react"
 
-// Define the columns for the students table
-const columns = [
-  {
-    accessorKey: "usn",
-    header: "USN",
-    cell: ({ row }) => {
-      const usn = row.getValue("usn")
-      return (
-        <div className="font-medium">
-          {usn}
-        </div>
-      )
-    },
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
-    cell: ({ row }) => {
-      const name = row.getValue("name")
-      return (
-        <div className="font-medium">
-          {name}
-        </div>
-      )
-    },
-  },
-  {
-    accessorKey: "year",
-    header: "Year",
-    cell: ({ row }) => {
-      const year = row.getValue("year")
-      return (
-        <Badge variant="outline" className="px-3 py-1">
-          {year}<sup>st</sup> Year
-        </Badge>
-      )
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
-  },
-  {
-    accessorKey: "section",
-    header: "Section",
-    cell: ({ row }) => {
-      const section = row.getValue("section")
-      return (
-        <Badge variant="secondary" className="px-3 py-1">
-          Section {section}
-        </Badge>
-      )
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-    cell: ({ row }) => {
-      const email = row.getValue("email")
-      return (
-        <div className="flex items-center gap-2 text-sm">
-          <Mail className="h-3.5 w-3.5 text-muted-foreground" />
-          <a href={`mailto:${email}`} className="hover:underline">
-            {email}
-          </a>
-        </div>
-      )
-    },
-  },
-  {
-    accessorKey: "phone",
-    header: "Phone",
-    cell: ({ row }) => {
-      const phone = row.getValue("phone")
-      return (
-        <div className="flex items-center gap-2 text-sm">
-          <Phone className="h-3.5 w-3.5 text-muted-foreground" />
-          <a href={`tel:${phone}`} className="hover:underline">
-            {phone}
-          </a>
-        </div>
-      )
-    },
-  },
-  {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row }) => {
-      const student = row.original
-      return (
-        <div className="flex items-center gap-2">
-          <Button size="sm" variant="outline" asChild>
-            <Link href={`/students/${student.usn}`}>View</Link>
-          </Button>
-          <Button size="sm" variant="outline" asChild>
-            <Link href={`/students/${student.usn}/edit`}>Edit</Link>
-          </Button>
-        </div>
-      )
-    },
-  },
-]
-
-async function getStudents() {
-  return sql`SELECT * FROM students ORDER BY year, section, name`
+// Student type definitions
+interface Student {
+  usn: string;
+  name: string;
+  year: number;
+  section: string;
+  email: string;
+  phone: string;
 }
 
-export default async function StudentsPage({ searchParams }) {
+async function getStudents(): Promise<Student[]> {
+  const results = await sql`SELECT * FROM students ORDER BY year, section, name`
+  // Cast the SQL results to the Student type
+  return results as Student[]
+}
+
+export default async function StudentsPage({ searchParams }: { searchParams?: { action?: string } }) {
   const students = await getStudents()
   const showAddForm = searchParams?.action === 'add'
 
@@ -213,7 +116,7 @@ export default async function StudentsPage({ searchParams }) {
             </div>
           </CardHeader>
           <CardContent className="px-0 pb-0">
-            <DataTable columns={columns} data={students} searchKey="name" />
+            <StudentsTable data={students} />
           </CardContent>
         </Card>
       )}
