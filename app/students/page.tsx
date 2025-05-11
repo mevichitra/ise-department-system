@@ -77,7 +77,7 @@ export default async function StudentsPage({ searchParams }: { searchParams?: { 
   const showAddForm = searchParams?.action === 'add'
 
   return (
-    <div className="flex flex-col h-full animate-in">
+    <div className="flex flex-col h-full">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center shrink-0">
         <div>
           <h1 className="gradient-heading text-3xl font-bold tracking-tight">Students</h1>
@@ -129,7 +129,14 @@ export default async function StudentsPage({ searchParams }: { searchParams?: { 
             </div>
           </CardHeader>
           <CardContent className="flex-1 p-0 overflow-hidden">
-            <StudentsTable data={students} />
+            {students.length > 0 ? (
+              <StudentsTable data={students} />
+            ) : (
+              <div className="flex flex-col items-center justify-center h-64 text-muted-foreground">
+                <div className="loader mb-4"></div>
+                <p>Loading student data...</p>
+              </div>
+            )}
           </CardContent>
         </Card>
       )}

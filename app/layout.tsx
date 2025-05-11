@@ -6,7 +6,7 @@ import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
-import { Analytics } from "@/components/analytics"
+import { Analytics } from "../components/analytics"
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" })
 
@@ -33,7 +33,9 @@ export default function RootLayout({
               <AppSidebar />
               <div className="flex-1 flex flex-col overflow-hidden">
                 <main className="flex-1 flex flex-col overflow-hidden p-6">
-                  {children}
+                  <div className="animate-in">
+                    {children}
+                  </div>
                 </main>
               </div>
             </div>

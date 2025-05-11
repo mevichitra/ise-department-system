@@ -244,8 +244,15 @@ export function StudentEditDialog({
             >
               Cancel
             </Button>
-            <Button type="submit" disabled={isLoading}>
-              {isLoading ? "Saving..." : "Save Changes"}
+            <Button type="submit" disabled={isLoading} className="min-w-[120px]">
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <div className="loader mr-2" style={{ width: '16px', height: '16px' }}></div>
+                  <span>Saving...</span>
+                </div>
+              ) : (
+                "Save Changes"
+              )}
             </Button>
           </DialogFooter>
         </form>

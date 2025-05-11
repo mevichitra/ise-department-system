@@ -129,8 +129,15 @@ export function AddStudentForm() {
         />
       </div>
       <div className="mt-2 flex items-center gap-2 sm:col-span-2">
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Saving..." : "Save Student"}
+        <Button type="submit" disabled={isLoading} className="relative">
+          {isLoading ? (
+            <>
+              <div className="loader mr-2" style={{ width: '16px', height: '16px' }}></div>
+              <span>Saving...</span>
+            </>
+          ) : (
+            "Save Student"
+          )}
         </Button>
         <Link href="/students">
           <Button type="button" variant="outline">Cancel</Button>

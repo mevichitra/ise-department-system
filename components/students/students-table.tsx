@@ -140,6 +140,7 @@ export function StudentsTable({ data }: StudentsTableProps) {
   const [editStudent, setEditStudent] = useState<Student | null>(null)
   const [viewDialogOpen, setViewDialogOpen] = useState(false)
   const [editDialogOpen, setEditDialogOpen] = useState(false)
+  const [isExporting, setIsExporting] = useState(false)
   
   const handleView = (student: Student) => {
     setViewStudent(student)
@@ -152,7 +153,13 @@ export function StudentsTable({ data }: StudentsTableProps) {
   }
   
   const handleExport = () => {
-    exportStudentsToCSV(data)
+    setIsExporting(true)
+    try {
+      exportStudentsToCSV(data)
+    } finally {
+      // Add a small delay to show the loading state 
+      setTimeout(() => setIsExporting(false), 500)
+    }
   }
   
   const tableColumns = columns.map(col => {
@@ -193,9 +200,19 @@ export function StudentsTable({ data }: StudentsTableProps) {
           variant="outline"
           size="sm"
           className="gap-1"
+          disabled={isExporting || data.length === 0}
         >
-          <Download className="h-4 w-4" />
-          Export
+          {isExporting ? (
+            <>
+              <div className="loader mr-2" style={{ width: '14px', height: '14px' }}></div>
+              Exporting...
+            </>
+          ) : (
+            <>
+              <Download className="h-4 w-4" />
+              Export
+            </>
+          )}
         </Button>
       </div>
       <div className="flex-1 overflow-auto rounded-md border">
