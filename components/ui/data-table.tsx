@@ -44,12 +44,12 @@ export function DataTable<TData, TValue>({ columns, data, searchKey }: DataTable
   return (
     <div className="flex flex-col h-full">
       {searchKey && (
-        <div className="flex items-center py-2 px-2">
+        <div className="flex items-center py-3 px-3">
           <Input
             placeholder="Search..."
             value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
             onChange={(event) => table.getColumn(searchKey)?.setFilterValue(event.target.value)}
-            className="max-w-sm"
+            className="max-w-sm rounded-lg border-2 py-2 px-3 focus-visible:ring-primary/60 shadow-sm"
           />
         </div>
       )}
@@ -87,15 +87,27 @@ export function DataTable<TData, TValue>({ columns, data, searchKey }: DataTable
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-between px-2 py-2 border-t">
-        <div className="text-sm text-muted-foreground">
+      <div className="flex items-center justify-between px-4 py-3 border-t bg-muted/30">
+        <div className="text-sm font-medium text-muted-foreground">
           Showing {table.getRowModel().rows.length} of {data.length} items
         </div>
-        <div className="flex items-center space-x-2">
-          <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+        <div className="flex items-center space-x-3">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="rounded-lg shadow-sm border-2 px-4 hover:bg-secondary transition-all duration-200" 
+            onClick={() => table.previousPage()} 
+            disabled={!table.getCanPreviousPage()}
+          >
             Previous
           </Button>
-          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="rounded-lg shadow-sm border-2 px-4 hover:bg-secondary transition-all duration-200" 
+            onClick={() => table.nextPage()} 
+            disabled={!table.getCanNextPage()}
+          >
             Next
           </Button>
         </div>

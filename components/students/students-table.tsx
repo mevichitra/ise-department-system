@@ -169,19 +169,23 @@ export function StudentsTable({ data }: StudentsTableProps) {
         cell: ({ row }: { row: Row<Student> }) => {
           const student = row.original
           return (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <Button 
                 size="sm" 
-                variant="outline"
+                variant="secondary"
+                className="rounded-lg px-3 py-1 h-8 hover:bg-secondary/80 shadow-sm transition-all duration-200 font-medium"
                 onClick={() => handleView(student)}
               >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></svg>
                 View
               </Button>
               <Button 
                 size="sm" 
                 variant="outline"
+                className="rounded-lg px-3 py-1 h-8 border-2 hover:bg-accent/30 shadow-sm transition-all duration-200 font-medium"
                 onClick={() => handleEdit(student)}
               >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
                 Edit
               </Button>
             </div>
@@ -194,28 +198,31 @@ export function StudentsTable({ data }: StudentsTableProps) {
   
   return (
     <div className="h-full flex flex-col">
-      <div className="flex justify-end mb-2">
+      <div className="flex justify-between items-center py-3 px-1 mb-3 border-b">
+        <div className="text-sm font-medium text-muted-foreground">
+          {data.length} {data.length === 1 ? 'student' : 'students'} found
+        </div>
         <Button
           onClick={handleExport}
           variant="outline"
           size="sm"
-          className="gap-1"
+          className="gap-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-200"
           disabled={isExporting || data.length === 0}
         >
           {isExporting ? (
             <>
-              <div className="loader mr-2" style={{ width: '14px', height: '14px' }}></div>
-              Exporting...
+              <div className="loader mr-1" style={{ width: '14px', height: '14px' }}></div>
+              <span>Exporting...</span>
             </>
           ) : (
             <>
               <Download className="h-4 w-4" />
-              Export
+              <span>Export</span>
             </>
           )}
         </Button>
       </div>
-      <div className="flex-1 overflow-auto rounded-md border">
+      <div className="flex-1 overflow-auto rounded-lg border shadow-sm bg-white">
         <DataTable 
           columns={tableColumns} 
           data={data} 

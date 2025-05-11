@@ -19,12 +19,12 @@ export function ExportButton({
     <Button 
       variant={variant} 
       size={size}
-      className={`flex items-center gap-1 ${className}`}
+      className={`flex items-center gap-2 hover:shadow-md transition-all duration-200 ${className}`}
       asChild
     >
       <Link href="/api/export/students" target="_blank">
-        <Download className="h-4 w-4" />
-        Export
+        <Download className="h-5 w-5" />
+        <span className="font-medium">Export</span>
       </Link>
     </Button>
   )

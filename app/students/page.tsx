@@ -78,19 +78,19 @@ export default async function StudentsPage({ searchParams }: { searchParams?: { 
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center shrink-0">
+      <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center shrink-0 pb-4">
         <div>
-          <h1 className="gradient-heading text-3xl font-bold tracking-tight">Students</h1>
-          <p className="mt-1 text-muted-foreground">Manage all student records in the department</p>
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent-foreground text-transparent bg-clip-text">Students</h1>
+          <p className="mt-2 text-muted-foreground">Manage all student records in the department</p>
         </div>
-        <div className="flex items-center gap-2">
-          <Button asChild variant="outline">
+        <div className="flex items-center gap-3">
+          <Button asChild variant="outline" size="lg" className="rounded-lg px-5 shadow-sm border-2 hover:bg-secondary transition-all duration-200">
             <Link href="/students?action=add" scroll={false}>Add Student</Link>
           </Button>
           <ExportButton 
             variant="secondary" 
-            size="sm"
-            className="hidden sm:flex" 
+            size="lg"
+            className="hidden sm:flex shadow-sm rounded-lg px-5" 
           />
         </div>
       </div>
@@ -107,22 +107,22 @@ export default async function StudentsPage({ searchParams }: { searchParams?: { 
           </CardContent>
         </Card>
       ) : (
-        <Card className="h-full overflow-hidden flex flex-col">
-          <CardHeader className="pb-3">
+        <Card className="h-full overflow-hidden flex flex-col bg-white shadow-sm border-2 rounded-xl">
+          <CardHeader className="pb-4 pt-5 px-6">
             <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <School className="h-5 w-5 text-primary" />
-                <span>Student Directory</span>
+              <CardTitle className="flex items-center gap-3 text-primary-foreground bg-gradient-to-r from-primary to-accent-foreground bg-clip-text text-transparent">
+                <School className="h-6 w-6 text-primary" />
+                Student Directory
               </CardTitle>
-              <div className="flex items-center gap-2">
-                <div className="relative w-full max-w-sm">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input 
                     placeholder="Search students..." 
-                    className="pl-8 sm:w-[260px] md:w-[300px]" 
+                    className="pl-9 pr-4 py-2 h-10 w-[260px] rounded-lg border-2 shadow-sm focus-visible:ring-primary/60" 
                   />
                 </div>
-                <Button variant="outline" size="icon">
+                <Button variant="outline" size="icon" className="h-10 w-10 rounded-lg border-2 shadow-sm hover:bg-secondary transition-all duration-200">
                   <Filter className="h-4 w-4" />
                 </Button>
               </div>
