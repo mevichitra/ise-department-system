@@ -27,9 +27,30 @@ interface Student {
 }
 
 async function getStudents(): Promise<Student[]> {
-  const results = await sql`SELECT * FROM students ORDER BY year, section, name`
-  // Cast the SQL results to the Student type
-  return results as Student[]
+  try {
+    // Explicitly query all required fields to ensure consistent data structure
+    const results = await sql`
+      SELECT usn, name, year, section, email, phone
+      FROM students 
+      ORDER BY year, section, name
+    `
+    
+    // For debugging
+    console.log('Fetched students count:', results.length)
+    
+    // Map the results to ensure they match the Student type exactly
+    return Array.isArray(results) ? results.map(row => ({
+      usn: row.usn,
+      name: row.name,
+      year: Number(row.year),
+      section: row.section,
+      email: row.email,
+      phone: row.phone
+    })) : []
+  } catch (error) {
+    console.error('Error fetching students:', error)
+    return [] // Return empty array on error to prevent UI crashes
+  }
 }
 
 export default async function StudentsPage({ searchParams }: { searchParams?: { action?: string } }) {
