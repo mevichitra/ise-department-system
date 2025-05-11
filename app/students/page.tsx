@@ -9,8 +9,11 @@ import {
   Download, 
   Search, 
   Filter, 
-  UserRoundPlus
+  UserRoundPlus,
+  Users,
+  ArrowUpDown
 } from "lucide-react"
+import { ExportButton } from "@/components/students/export-button"
 
 // Student type definitions
 interface Student {
@@ -40,15 +43,14 @@ export default async function StudentsPage({ searchParams }: { searchParams?: { 
           <p className="mt-1 text-muted-foreground">Manage all student records in the department</p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="gap-2">
-            <Download className="h-4 w-4" /> Export
+          <Button asChild variant="outline">
+            <Link href="/students?action=add" scroll={false}>Add Student</Link>
           </Button>
-          <Link href="/students?action=add">
-            <Button size="sm" className="gap-2">
-              <UserRoundPlus className="h-4 w-4" />
-              Add Student
-            </Button>
-          </Link>
+          <ExportButton 
+            variant="secondary" 
+            size="sm"
+            className="hidden sm:flex" 
+          />
         </div>
       </div>
 
