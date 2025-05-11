@@ -173,7 +173,7 @@ export function StudentsTable({ data }: StudentsTableProps) {
               <Button 
                 size="sm" 
                 variant="secondary"
-                className="rounded-lg px-3 py-1 h-8 hover:bg-secondary/80 shadow-sm transition-all duration-200 font-medium"
+                className="rounded-lg px-3 py-1 h-8 bg-blue-600 hover:bg-blue-700 text-white transition-all duration-200 font-medium"
                 onClick={() => handleView(student)}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></svg>
@@ -182,7 +182,7 @@ export function StudentsTable({ data }: StudentsTableProps) {
               <Button 
                 size="sm" 
                 variant="outline"
-                className="rounded-lg px-3 py-1 h-8 border-2 hover:bg-accent/30 shadow-sm transition-all duration-200 font-medium"
+                className="rounded-lg px-3 py-1 h-8 bg-gray-700 border border-gray-600 text-gray-200 hover:bg-gray-600 transition-all duration-200 font-medium"
                 onClick={() => handleEdit(student)}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
@@ -198,15 +198,15 @@ export function StudentsTable({ data }: StudentsTableProps) {
   
   return (
     <div className="h-full flex flex-col">
-      <div className="flex justify-between items-center py-3 px-1 mb-3 border-b">
-        <div className="text-sm font-medium text-muted-foreground">
+      <div className="flex justify-between items-center py-3 px-4 mb-3 border-b border-gray-700 bg-gray-800">
+        <div className="text-sm font-medium text-gray-300">
           {data.length} {data.length === 1 ? 'student' : 'students'} found
         </div>
         <Button
           onClick={handleExport}
           variant="outline"
           size="sm"
-          className="gap-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-200"
+          className="gap-2 px-4 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 hover:bg-gray-600 transition-all duration-200"
           disabled={isExporting || data.length === 0}
         >
           {isExporting ? (
@@ -222,7 +222,7 @@ export function StudentsTable({ data }: StudentsTableProps) {
           )}
         </Button>
       </div>
-      <div className="flex-1 overflow-auto rounded-lg border shadow-sm bg-white">
+      <div className="flex-1 overflow-auto rounded-lg border shadow-sm bg-gray-900">
         <DataTable 
           columns={tableColumns} 
           data={data} 

@@ -77,62 +77,64 @@ export default async function StudentsPage({ searchParams }: { searchParams?: { 
   const showAddForm = searchParams?.action === 'add'
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-gray-950">
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center shrink-0 pb-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent-foreground text-transparent bg-clip-text">Students</h1>
-          <p className="mt-2 text-muted-foreground">Manage all student records in the department</p>
+          <h1 className="text-3xl font-bold tracking-tight text-white">Students</h1>
+          <p className="mt-2 text-gray-400">Manage all student records in the department</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button asChild variant="outline" size="lg" className="rounded-lg px-5 shadow-sm border-2 hover:bg-secondary transition-all duration-200">
+          <Button asChild variant="outline" size="lg" className="rounded-lg px-5 bg-blue-600 hover:bg-blue-700 text-white border-blue-700 transition-all duration-200">
             <Link href="/students?action=add" scroll={false}>Add Student</Link>
           </Button>
           <ExportButton 
-            variant="secondary" 
+            variant="outline" 
             size="lg"
-            className="hidden sm:flex shadow-sm rounded-lg px-5" 
+            className="hidden sm:flex bg-gray-700 text-gray-200 border border-gray-600 hover:bg-gray-600 rounded-lg px-5" 
           />
         </div>
       </div>
 
       <div className="flex-1 min-h-0">
         {showAddForm ? (
-        <Card className="h-full overflow-hidden flex flex-col">
-          <CardHeader>
-            <CardTitle>Add New Student</CardTitle>
-            <CardDescription>Enter student information to add them to the system</CardDescription>
+        <Card className="h-full overflow-hidden flex flex-col bg-gray-900 shadow-md border border-gray-700 rounded-lg">
+          <CardHeader className="bg-gray-800 border-b border-gray-700">
+            <CardTitle className="text-white">Add New Student</CardTitle>
+            <CardDescription className="text-gray-400">Enter student information to add them to the system</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex-1 p-6 bg-gray-900 text-gray-200" style={{ height: 'calc(100% - 80px)', overflow: 'auto' }}>
             <AddStudentForm />
           </CardContent>
         </Card>
       ) : (
-        <Card className="h-full overflow-hidden flex flex-col bg-white shadow-sm border-2 rounded-xl">
-          <CardHeader className="pb-4 pt-5 px-6">
+        <Card className="h-full overflow-hidden flex flex-col bg-gray-900 shadow-md border border-gray-700 rounded-lg">
+          <CardHeader className="pb-4 pt-5 px-6 bg-gray-800 border-b border-gray-700">
             <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-3 text-primary-foreground bg-gradient-to-r from-primary to-accent-foreground bg-clip-text text-transparent">
-                <School className="h-6 w-6 text-primary" />
+              <CardTitle className="flex items-center gap-3 text-white">
+                <School className="h-6 w-6 text-blue-400" />
                 Student Directory
               </CardTitle>
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input 
                     placeholder="Search students..." 
-                    className="pl-9 pr-4 py-2 h-10 w-[260px] rounded-lg border-2 shadow-sm focus-visible:ring-primary/60" 
+                    className="pl-9 pr-4 py-2 h-10 w-[260px] rounded-lg border border-gray-600 bg-gray-700 text-gray-200 shadow-sm focus-visible:ring-blue-600" 
                   />
                 </div>
-                <Button variant="outline" size="icon" className="h-10 w-10 rounded-lg border-2 shadow-sm hover:bg-secondary transition-all duration-200">
+                <Button variant="outline" size="icon" className="h-10 w-10 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 hover:bg-gray-600 transition-all duration-200">
                   <Filter className="h-4 w-4" />
                 </Button>
               </div>
             </div>
           </CardHeader>
-          <CardContent className="flex-1 p-0 overflow-hidden">
+          <CardContent className="flex-1 p-0" style={{ height: 'calc(100% - 85px)', overflow: 'hidden' }}>
             {students.length > 0 ? (
-              <StudentsTable data={students} />
+              <div className="h-full">
+                <StudentsTable data={students} />
+              </div>
             ) : (
-              <div className="flex flex-col items-center justify-center h-64 text-muted-foreground">
+              <div className="flex flex-col items-center justify-center h-64 text-gray-400">
                 <div className="loader mb-4"></div>
                 <p>Loading student data...</p>
               </div>
