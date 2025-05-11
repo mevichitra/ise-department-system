@@ -33,8 +33,8 @@ export default async function StudentsPage({ searchParams }: { searchParams?: { 
   const showAddForm = searchParams?.action === 'add'
 
   return (
-    <div className="animate-in space-y-8">
-      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+    <div className="flex flex-col h-full animate-in">
+      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center shrink-0">
         <div>
           <h1 className="gradient-heading text-3xl font-bold tracking-tight">Students</h1>
           <p className="mt-1 text-muted-foreground">Manage all student records in the department</p>
@@ -52,8 +52,9 @@ export default async function StudentsPage({ searchParams }: { searchParams?: { 
         </div>
       </div>
 
-      {showAddForm ? (
-        <Card className="hover-card-effect">
+      <div className="flex-1 min-h-0">
+        {showAddForm ? (
+        <Card className="h-full overflow-hidden flex flex-col">
           <CardHeader>
             <CardTitle>Add New Student</CardTitle>
             <CardDescription>Enter student information to add them to the system</CardDescription>
@@ -94,7 +95,7 @@ export default async function StudentsPage({ searchParams }: { searchParams?: { 
           </CardContent>
         </Card>
       ) : (
-        <Card className="hover-card-effect">
+        <Card className="h-full overflow-hidden flex flex-col">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
@@ -115,11 +116,12 @@ export default async function StudentsPage({ searchParams }: { searchParams?: { 
               </div>
             </div>
           </CardHeader>
-          <CardContent className="px-0 pb-0">
+          <CardContent className="flex-1 p-0 overflow-hidden">
             <StudentsTable data={students} />
           </CardContent>
         </Card>
       )}
+      </div>
     </div>
   )
 }

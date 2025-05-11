@@ -29,10 +29,10 @@ export default function RootLayout({
       <body className={`${outfit.className} ${outfit.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <SidebarProvider>
-            <div className="flex h-screen bg-background">
+            <div className="flex h-screen bg-background overflow-hidden">
               <AppSidebar />
               <div className="flex-1 flex flex-col overflow-hidden">
-                <main className="flex-1 overflow-y-auto px-6 py-8 transition-all duration-200">
+                <main className="flex-1 flex flex-col overflow-hidden p-6">
                   {children}
                 </main>
               </div>

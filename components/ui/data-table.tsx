@@ -42,9 +42,9 @@ export function DataTable<TData, TValue>({ columns, data, searchKey }: DataTable
   })
 
   return (
-    <div>
+    <div className="flex flex-col h-full">
       {searchKey && (
-        <div className="flex items-center py-4">
+        <div className="flex items-center py-2 px-2">
           <Input
             placeholder="Search..."
             value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
@@ -53,7 +53,7 @@ export function DataTable<TData, TValue>({ columns, data, searchKey }: DataTable
           />
         </div>
       )}
-      <div className="rounded-md border">
+      <div className="flex-1 overflow-auto">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -87,13 +87,18 @@ export function DataTable<TData, TValue>({ columns, data, searchKey }: DataTable
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-          Previous
-        </Button>
-        <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-          Next
-        </Button>
+      <div className="flex items-center justify-between px-2 py-2 border-t">
+        <div className="text-sm text-muted-foreground">
+          Showing {table.getRowModel().rows.length} of {data.length} items
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+            Previous
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+            Next
+          </Button>
+        </div>
       </div>
     </div>
   )

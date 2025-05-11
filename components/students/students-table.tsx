@@ -113,11 +113,11 @@ const columns: ColumnDef<Student>[] = [
       const student = row.original as Student
       return (
         <div className="flex items-center gap-2">
-          <Button size="sm" variant="outline" asChild>
-            <Link href={`/students/${student.usn}`}>View</Link>
+          <Button size="sm" variant="outline">
+            View
           </Button>
-          <Button size="sm" variant="outline" asChild>
-            <Link href={`/students/${student.usn}/edit`}>Edit</Link>
+          <Button size="sm" variant="outline">
+            Edit
           </Button>
         </div>
       )
@@ -130,5 +130,15 @@ interface StudentsTableProps {
 }
 
 export function StudentsTable({ data }: StudentsTableProps) {
-  return <DataTable columns={columns} data={data} searchKey="name" />
+  return (
+    <div className="h-full flex flex-col">
+      <div className="flex-1 overflow-auto rounded-md border">
+        <DataTable 
+          columns={columns} 
+          data={data} 
+          searchKey="name"
+        />
+      </div>
+    </div>
+  )
 }
