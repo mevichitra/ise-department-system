@@ -14,6 +14,7 @@ import {
   ArrowUpDown
 } from "lucide-react"
 import { ExportButton } from "@/components/students/export-button"
+import { AddStudentForm } from "@/components/students/add-student-form"
 
 // Student type definitions
 interface Student {
@@ -62,38 +63,7 @@ export default async function StudentsPage({ searchParams }: { searchParams?: { 
             <CardDescription>Enter student information to add them to the system</CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="grid gap-4 sm:grid-cols-2">
-              <div className="grid gap-2">
-                <label htmlFor="usn" className="text-sm font-medium">USN</label>
-                <Input id="usn" placeholder="e.g. 1SI21IS001" />
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="name" className="text-sm font-medium">Full Name</label>
-                <Input id="name" placeholder="e.g. John Doe" />
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="year" className="text-sm font-medium">Year</label>
-                <Input id="year" type="number" placeholder="e.g. 3" min="1" max="4" />
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="section" className="text-sm font-medium">Section</label>
-                <Input id="section" placeholder="e.g. A" />
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="email" className="text-sm font-medium">Email</label>
-                <Input id="email" type="email" placeholder="e.g. john.doe@ise.edu" />
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="phone" className="text-sm font-medium">Phone</label>
-                <Input id="phone" placeholder="e.g. 9876543210" />
-              </div>
-              <div className="mt-2 flex items-center gap-2 sm:col-span-2">
-                <Button>Save Student</Button>
-                <Link href="/students">
-                  <Button variant="outline">Cancel</Button>
-                </Link>
-              </div>
-            </form>
+            <AddStudentForm />
           </CardContent>
         </Card>
       ) : (
