@@ -28,28 +28,47 @@ interface Student {
 
 async function getStudents(): Promise<Student[]> {
   try {
-    // Explicitly query all required fields to ensure consistent data structure
+    // Log the database URL (partially) for debugging
+    console.log('Using database connection:', process.env.DATABASE_URL?.substring(0, 20) + '...')
+
+    // Direct database connection, explicitly targeting students table
     const results = await sql`
-      SELECT usn, name, year, section, email, phone
+      SELECT 
+        usn, 
+        name, 
+        year, 
+        section, 
+        email, 
+        phone 
       FROM students 
       ORDER BY year, section, name
     `
     
-    // For debugging
-    console.log('Fetched students count:', results.length)
+    // Verbose debugging to see what's coming from the database
+    console.log('Raw database result:', JSON.stringify(results))
+    console.log('Fetched students count:', results?.length || 0)
+    
+    if (!Array.isArray(results) || results.length === 0) {
+      console.warn('No students found in database or results is not an array!')
+    } else {
+      console.log('First student from DB:', results[0])
+    }
     
     // Map the results to ensure they match the Student type exactly
-    return Array.isArray(results) ? results.map(row => ({
-      usn: row.usn,
-      name: row.name,
-      year: Number(row.year),
-      section: row.section,
-      email: row.email,
-      phone: row.phone
+    const mappedResults: Student[] = Array.isArray(results) ? results.map(row => ({
+      usn: String(row.usn || ''),
+      name: String(row.name || ''),
+      year: Number(row.year || 1),
+      section: String(row.section || ''),
+      email: String(row.email || ''),
+      phone: String(row.phone || '')
     })) : []
+    
+    return mappedResults
   } catch (error) {
     console.error('Error fetching students:', error)
-    return [] // Return empty array on error to prevent UI crashes
+    // Return empty array on error to prevent UI crashes
+    return [] 
   }
 }
 
