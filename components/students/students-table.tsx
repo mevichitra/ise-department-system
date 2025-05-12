@@ -198,7 +198,7 @@ export function StudentsTable({ data }: StudentsTableProps) {
   
   return (
     <div className="h-full flex flex-col">
-      <div className="flex justify-between items-center py-3 px-4 mb-3 border-b border-gray-700 bg-gray-800">
+      {/* <div className="flex justify-between items-center py-3 px-4 mb-3 border-b border-gray-700 bg-gray-800">
         <div className="text-sm font-medium text-gray-300">
           {data.length} {data.length === 1 ? 'student' : 'students'} found
         </div>
@@ -221,8 +221,8 @@ export function StudentsTable({ data }: StudentsTableProps) {
             </>
           )}
         </Button>
-      </div>
-      <div className="flex-1 overflow-auto rounded-lg border shadow-sm bg-gray-900">
+      </div> */}
+      <div className="flex-1 overflow-auto rounded-lg border shadow-sm bg-gray-900" style={{ maxHeight: 'calc(100vh - 200px)' }}>
         <DataTable 
           columns={tableColumns} 
           data={data} 

@@ -115,16 +115,6 @@ export default async function StudentsPage({ searchParams }: { searchParams?: { 
                 Student Directory
               </CardTitle>
               <div className="flex items-center gap-3">
-                {/* <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <Input 
-                    placeholder="Search students..." 
-                    className="pl-9 pr-4 py-2 h-10 w-[260px] rounded-lg border border-gray-600 bg-gray-700 text-gray-200 shadow-sm focus-visible:ring-blue-600" 
-                  />
-                </div> */}
-                {/* <Button variant="outline" size="icon" className="h-10 w-10 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 hover:bg-gray-600 transition-all duration-200">
-                  <Filter className="h-4 w-4" />
-                </Button> */}
               </div>
             </div>
           </CardHeader>

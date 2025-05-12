@@ -53,7 +53,7 @@ export function DataTable<TData, TValue>({ columns, data, searchKey }: DataTable
           />
         </div>
       )}
-      <div className="flex-1 overflow-auto" style={{ height: 'calc(100% - 80px)', maxHeight: 'unset' }}>
+      <div className="flex-1 overflow-auto" style={{ height: 'calc(100% - 80px)', maxHeight: 'unset', scrollbarWidth: 'thin' }}>
         <Table className="w-full">
           <TableHeader className="bg-gray-800 sticky top-0" style={{ zIndex: 10 }}>
             {table.getHeaderGroups().map((headerGroup) => (
